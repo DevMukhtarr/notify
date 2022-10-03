@@ -4,7 +4,7 @@ const port = process.env.PORT
 
 
 app.get("/", (req, res) =>{
-    res.send("Welcome to Pent")
+    res.send("Backend Boilerplate")
 })
 
 app.listen(port, () =>{
