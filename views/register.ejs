@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #ecf0f1; /* Light Blue Background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: #ffffff; /* White Container */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .login-container h2 {
+      color: #3498db; /* Light Blue Text */
+    }
+
+    .login-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      box-sizing: border-box;
+    }
+
+    .login-form button {
+      background-color: #3498db; /* Light Blue Button */
+      color: #ffffff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .login-signup-section span{
+        display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Sign up</h2>
+    <form class="login-form" id="registrationForm">
+        <div style="display: flex;">
+            <input type="text" name="first_name" placeholder="firstname" class="first_name" required>
+            <input style="margin-left: 1%;" type="text" name="last_name" placeholder="lastname" class="last_name" required>
+        </div>
+      <input type="text" name="email" placeholder="email" class="email" required>
+      <input type="text" name="username" placeholder="Username" class="username" required>
+      <input type="text" name="phone_number" placeholder="phonenumber" class="phone_number" required>
+      <div style="display: flex;">
+          <input type="password" name="password" placeholder="Password" class="password required">
+          <input style="margin-left: 1%;"  type="password" name="confirm_password" placeholder="Confirm password" class="confirm_password" required>
+      </div>
+      <div class="login-signup-section">
+          <button class="submit_button" type="submit">Signup</button>
+          <span>A user? <a href="/">Sign In</a></span>
+      </div>
+    </form>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const registrationForm = document.getElementById('registrationForm');
+
+        registrationForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(registrationForm);
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    first_name: formData.get('first_name'),
+                    last_name: formData.get('last_name'),
+                    email: formData.get('email'),
+                    username: formData.get('username'),
+                    phone_number: formData.get('phone_number'),
+                    password: formData.get('password'),
+                    confirm_password: formData.get('confirm_password'),
+                }),
+            })
+            .then(response => {
+                if (response.status === 409) {
+                throw new Error('Account already exists');
+            }
+                return response.json();
+            })
+            .then(data => {
+                // Assuming the server returns a JWT in the response
+                const jwtToken = data.token;
+
+                // Store the JWT token in local storage
+                localStorage.setItem('x-access-token', jwtToken);
+                window.location.href = '/home';
+            })
+            .catch(error => {
+              if (error.message === 'Account already exists') {
+                alert('Account already exists. Please use a different email or username.');
+                console.error('Registration error:', error);
+                // Handle registration error, e.g., show an error message to the user
+            }
+            });
+        });
+    });
+</script>
+</body>
+</html>

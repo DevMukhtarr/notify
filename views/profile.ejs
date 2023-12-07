@@ -1,0 +1,83 @@
+<!-- views/profile.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    .profile-container {
+      max-width: 600px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .user-info {
+      margin-top: 20px;
+    }
+
+    .pii {
+      color: #ff0000; /* Red color for sensitive information */
+    }
+
+    button {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <h1>User Profile</h1>
+    
+    <div class="user-info">
+      <p><strong>First Name:</strong> Test </p>
+      <p><strong>Last Name:</strong> Test</p>
+      <p><strong>First House Address:</strong> Test</p>
+      <p><strong>Second House Address:</strong> Test</p>
+      <p><strong>Current House Address:</strong> Test</p>
+      <p><strong>Relationship Status:</strong> Test</p>
+      <p><strong>Gender:</strong> Test</p>
+      <p><strong>Occupation:</strong> Test</p>
+      <p class="pii"><strong>Personally Identifiable Information (PII):</strong> Test </p>
+
+      <!-- Update Profile Button -->
+      <button onclick="updateProfile()">Update Profile</button>
+    </div>
+  </div>
+
+  <script>
+    function updateProfile() {
+      // Implement logic to show a form or modal for updating user details
+      alert('Implement your update profile logic here!');
+    }
+  </script>
+</body>
+</html>

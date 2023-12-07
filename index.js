@@ -3,8 +3,10 @@ import app from "./app.js";
 const port = process.env.PORT
 
 
+app.set('view engine', 'ejs'); 
+
 app.get("/", (req, res) =>{
-    res.send("Backend Boilerplate")
+    res.render('index')
 })
 
 app.listen(port, () =>{
