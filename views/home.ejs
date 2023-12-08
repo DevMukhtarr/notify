@@ -72,7 +72,7 @@
     </div>
   </div>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function () {
       const locationButton = document.getElementById('locationButton');
 
       locationButton.addEventListener('click', function () {
@@ -80,12 +80,20 @@
         if ('geolocation' in navigator) {
           navigator.geolocation.getCurrentPosition(
             function (position) {
-              // Access the user's coordinates
               const latitude = position.coords.latitude;
               const longitude = position.coords.longitude;
 
-              // Do something with the coordinates, e.g., display or send to the server
-              alert(`Latitude: ${latitude}, Longitude: ${longitude}`);
+              fetch('/send-details', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  latitude,
+                  longitude
+                })
+            })
+            .then((response) => response.json())
             },
             function (error) {
               // Handle geolocation error
