@@ -6,8 +6,7 @@ const port = 4400 || process.env.PORT
 app.set('view engine', 'ejs'); 
 
 app.get("/", (req, res) =>{
-    // res.render('index')
-    res.send("Hi")
+    res.render('index')
 })
 
 app.listen(port, () =>{
