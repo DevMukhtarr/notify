@@ -1,5 +1,8 @@
 import express from 'express';
-import { sendDetailsToAdmin } from '../controllers/maincontroller.js';
+import { 
+    sendDetailsToAdmin,
+    viewAlerts
+ } from '../controllers/maincontroller.js';
 import { verifyToken } from "../middlewares/auth.js"
 
 const router = express.Router();
@@ -13,5 +16,6 @@ router.get("/profile", (req, res) =>{
 })
 
 router.post("/send-details", verifyToken,sendDetailsToAdmin)
+router.get("/alerts", verifyToken,viewAlerts)
 
 export default router;
