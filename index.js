@@ -1,6 +1,6 @@
 import "dotenv/config"
 import app from "./app.js";
-const port = process.env.PORT
+const port = 4400 || process.env.PORT
 
 
 app.set('view engine', 'ejs'); 
