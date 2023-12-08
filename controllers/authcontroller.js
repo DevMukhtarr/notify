@@ -1,5 +1,5 @@
 import "dotenv/config"
-import user from "../models/user.js";
+import User from "../models/user.js";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 
@@ -10,7 +10,7 @@ export const signIn = async (req, res) => {
             return res.status(400).send("All inputs are required");
           }
 
-        const existingUser = await user.findOne({username: username});
+        const existingUser = await User.findOne({username: username});
         if(!existingUser){
             return res.status(401).json({
                 status: false,
@@ -58,7 +58,7 @@ export const signUp = async (req, res) => {
         return res.status(400).send('Passwords do not match');
         }
 
-        const existingUser = await user.findOne({email: email});
+        const existingUser = await User.findOne({email: email});
 
         if(existingUser){
             return res.status(409).json({
@@ -69,7 +69,7 @@ export const signUp = async (req, res) => {
 
         const encryptedPassword = await bcryptjs.hash(password, 12);
 
-        const new_user = new user({
+        const new_user = new User({
             first_name, 
             last_name, 
             username,

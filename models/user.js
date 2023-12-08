@@ -30,6 +30,10 @@ const user = new Schema({
         type: String, 
         default:null
     },
+    previous_house_address: {
+        type: String, 
+        default:null
+    },
     current_house_address: {
         type: String, 
         default:null

@@ -12,6 +12,6 @@ router.get("/profile", (req, res) =>{
     res.render('profile')
 })
 
-router.post("/send-details", sendDetailsToAdmin)
+router.post("/send-details", verifyToken,sendDetailsToAdmin)
 
 export default router;

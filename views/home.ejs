@@ -86,7 +86,8 @@
               fetch('/send-details', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'x-access-token': localStorage.getItem('x-access-token')
                 },
                 body: JSON.stringify({
                   latitude,
@@ -94,6 +95,7 @@
                 })
             })
             .then((response) => response.json())
+            .then((data) => console.log(data))
             },
             function (error) {
               // Handle geolocation error
