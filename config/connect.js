@@ -8,7 +8,7 @@ mongoose
   })
   .then(() => console.log("DB Connected!"))
   .catch((err) => {
-    console.log("not able to connect to database"+ err);
+    console.log("not able to connect to database "+ err);
   });
 
 export default app;
