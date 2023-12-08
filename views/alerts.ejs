@@ -1,0 +1,56 @@
+<!-- views/alerts.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Alerts</title>
+  <style>
+    /* Add your CSS styles here */
+  </style>
+</head>
+<body>
+  <h1>All Alerts</h1>
+
+  <% if (alerts.length === 0) { %>
+    <p>No alerts available</p>
+  <% } else { %>
+    <ul>
+      <% alerts.forEach(alert => { %>
+        <li>
+          <strong>Alert ID:</strong> <%= alert._id %><br>
+          <strong>User ID:</strong> <%= alert.user_id._id %><br>
+          <strong>Email:</strong> <%= alert.user_id.email %><br>
+          <!-- Add other user properties as needed -->
+          <strong>Current Location:</strong> <%= alert.current_location %><br>
+          <hr>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+
+  <!-- Add your JavaScript scripts here if needed -->
+<script>
+    // Frontend code (assuming you have the JWT token stored in localStorage)
+const jwtToken = localStorage.getItem('x-access-token');
+
+fetch('/alerts', {
+  method: 'GET',
+  headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': `${jwtToken}`,
+  },
+})
+  .then(response => response.json())
+  .then(data => {
+    // Process the response data as needed
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Request failed:', error);
+  });
+
+</script>
+</body>
+</html>
