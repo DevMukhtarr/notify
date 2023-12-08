@@ -32,9 +32,9 @@
 
   <!-- Add your JavaScript scripts here if needed -->
 <script>
-    // Frontend code (assuming you have the JWT token stored in localStorage)
-const jwtToken = localStorage.getItem('x-access-token');
+  const jwtToken = localStorage.getItem('x-access-token');
 
+console.log('Token:', jwtToken);
 fetch('/alerts', {
   method: 'GET',
   headers: {
@@ -50,7 +50,6 @@ fetch('/alerts', {
   .catch(error => {
     console.error('Request failed:', error);
   });
-
 </script>
 </body>
 </html>

@@ -78,7 +78,7 @@
   <div class="navbar">
     <a href="/profile">Profile</a>
     <a href="#education">Education</a>
-    <a href="/alerts">Alerts</a>
+    <a href="#" onclick="goToAlerts()">Alerts</a>
   </div>
 
   <div class="content">
@@ -87,6 +87,21 @@
     </div>
   </div>
   <script>
+
+function goToAlerts() {
+  // Check authentication status and navigate accordingly
+  const jwtToken = localStorage.getItem('x-access-token');
+  console.log('Token:', localStorage.getItem('x-access-token'))
+  if (jwtToken) {
+    // If token exists, navigate to the alerts page
+    window.location.href = '/alerts';
+  } else {
+    // If no token, handle authentication (e.g., redirect to login page)
+    alert('Authentication required. Redirecting to login page.');
+    // Redirect to login page or show a login modal, etc.
+  }
+}
+
   document.addEventListener('DOMContentLoaded', function () {
       const locationButton = document.getElementById('locationButton');
 
@@ -124,6 +139,7 @@
         }
       });
     });
+
   </script>
 </body>
 </html>
