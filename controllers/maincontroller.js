@@ -9,8 +9,6 @@ export const sendDetailsToAdmin = async (req, res) => {
         const user_id = req.user.id
 
         const user = await User.findById(user_id);
-
-        console.log(user)
     
         const data = await opencage.geocode({
              key: process.env.OPEN_CAGE_KEY,
@@ -23,7 +21,6 @@ export const sendDetailsToAdmin = async (req, res) => {
                 const location = place.formatted;
                 // const road = place.components.road;
 
-                console.log(address)
                 const new_alert = await alert.create({
                     user_id,
                     current_location: location,
@@ -42,6 +39,16 @@ export const sendDetailsToAdmin = async (req, res) => {
                  });
               }
     } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+export const viewAlerts = () => {
+    try {
+        const user_id = req.user.id;
+
+        const role = req.user.role;
+    } catch (error) {     
         res.status(500).json({ message: error.message });
     }
 }

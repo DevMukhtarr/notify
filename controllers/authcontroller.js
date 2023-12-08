@@ -20,7 +20,11 @@ export const signIn = async (req, res) => {
 
         if(existingUser.email && (await bcryptjs.compare(password, existingUser.password))){
 
-            const token = jwt.sign({ id: existingUser._id, email: existingUser.email},
+            const token = jwt.sign({
+                 id: existingUser._id,
+                email: existingUser.email, 
+                role: 'user'
+            },
                 process.env.JWT_SECRET_KEY,
                  {
                     expiresIn: "2d",
@@ -81,7 +85,9 @@ export const signUp = async (req, res) => {
         await new_user.save();
 
         const token = jwt.sign({ 
-            id: new_user._id, email: new_user.email
+            id: new_user._id, 
+            email: new_user.email,
+            role: 'user'
         }, process.env.JWT_SECRET_KEY);
         
         return res.status(200).json({ 

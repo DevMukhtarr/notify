@@ -58,6 +58,10 @@ const user = new Schema({
         type: String, 
         default:null
     },
+    role:{
+        type: String,
+        default: "user"
+    }
 })
 
 export default mongoose.model("User", user)
