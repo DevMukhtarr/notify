@@ -1,55 +1,85 @@
-<!-- views/alerts.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Alerts</title>
+  <title>Alerts</title>
   <style>
-    /* Add your CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .alert-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    .alert {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+      padding: 10px;
+      width: 300px;
+    }
   </style>
 </head>
 <body>
-  <h1>All Alerts</h1>
 
-  <% if (alerts.length === 0) { %>
-    <p>No alerts available</p>
-  <% } else { %>
-    <ul>
-      <% alerts.forEach(alert => { %>
-        <li>
-          <strong>Alert ID:</strong> <%= alert._id %><br>
-          <strong>User ID:</strong> <%= alert.user_id._id %><br>
-          <strong>Email:</strong> <%= alert.user_id.email %><br>
-          <!-- Add other user properties as needed -->
-          <strong>Current Location:</strong> <%= alert.current_location %><br>
-          <hr>
-        </li>
-      <% }); %>
-    </ul>
-  <% } %>
+  <h1>List of Alerts</h1>
 
-  <!-- Add your JavaScript scripts here if needed -->
-<script>
-  const jwtToken = localStorage.getItem('x-access-token');
+  <div class="alert-container" id="alertContainer">
+    <!-- Alerts will be dynamically added here using JavaScript -->
+  </div>
 
-console.log('Token:', jwtToken);
-fetch('/alerts', {
-  method: 'GET',
-  headers: {
-      'Content-Type': 'application/json',
-      'x-access-token': `${jwtToken}`,
-  },
-})
-  .then(response => response.json())
-  .then(data => {
-    // Process the response data as needed
-    console.log(data);
-  })
-  .catch(error => {
-    console.error('Request failed:', error);
-  });
-</script>
+  <script>
+    // Dummy data - Replace this with your actual data
+    const alerts = [
+      {
+        email: "john.doe@example.com",
+        first_name: "John",
+        last_name: "Doe",
+        username: "johndoe",
+        // Add other fields here
+      },
+      {
+        email: "jane.smith@example.com",
+        first_name: "Jane",
+        last_name: "Smith",
+        username: "janesmith",
+        // Add other fields here
+      },
+      // Add more alerts as needed
+    ];
+
+    // Function to generate HTML for each alert
+    function generateAlertHTML(alert) {
+      return `
+        <div class="alert">
+          <strong>Email:</strong> ${alert.email}<br>
+          <strong>Name:</strong> ${alert.first_name} ${alert.last_name}<br>
+          <strong>Username:</strong> ${alert.username}<br>
+          <!-- Add other fields as needed -->
+        </div>
+      `;
+    }
+
+    // Function to display alerts on the page
+    function displayAlerts() {
+      const alertContainer = document.getElementById("alertContainer");
+      alertContainer.innerHTML = ""; // Clear existing content
+
+      // Iterate through each alert and append its HTML to the container
+      alerts.forEach((alert) => {
+        alertContainer.innerHTML += generateAlertHTML(alert);
+      });
+    }
+
+    // Call the displayAlerts function to initially load alerts
+    displayAlerts();
+  </script>
 </body>
 </html>

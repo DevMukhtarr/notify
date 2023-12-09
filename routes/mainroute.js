@@ -16,8 +16,8 @@ router.get("/profile", (req, res) =>{
 })
 
 router.post("/send-details", verifyToken,sendDetailsToAdmin)
-router.get("/alerts", verifyToken,viewAlerts, (req, res) =>{
-    res.render('/alerts')
+router.get("/alerts", (req, res) =>{
+    res.render('alerts')
 })
 
 export default router;

@@ -92,7 +92,6 @@
 function goToAlerts() {
   // Check authentication status and navigate accordingly
   const jwtToken = localStorage.getItem('x-access-token');
-  console.log('Token:', localStorage.getItem('x-access-token'))
   if (jwtToken) {
     // If token exists, navigate to the alerts page
     window.location.href = '/alerts';
