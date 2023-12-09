@@ -122,7 +122,6 @@
                 // Assuming the server returns a JWT in the response
                 const jwtToken = data.token;
 
-                // Store the JWT token in local storage
                 localStorage.setItem('x-access-token', jwtToken);
                 window.location.href = '/home';
             })
